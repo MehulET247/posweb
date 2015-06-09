@@ -1,0 +1,38 @@
+@import "compass";
+@import "foundation_and_overrides";
+
+html {
+  background-color: #91BED4;
+  @include background-image(linear-gradient(tint(#91BED4, 75%), #91BED4));
+  background-attachment: fixed;
+}
+
+body {
+  background: initial;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.container {
+  background-color: #FFF;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.content {
+  padding: 1rem 2rem 2rem;
+  overflow: auto;
+}
+
+.alert-box {
+  margin-bottom: 0px;
+}
+
+.button.orange {
+  background-color: #F26101;
+  border-color: shade(#F26101, 25%);
+
+  &:hover {
+    background-color: shade(#F26101, 25%);
+  }
+}
