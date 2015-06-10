@@ -15,6 +15,9 @@ gem 'devise'
 gem 'figaro'
 gem 'simple_form'
 
+gem 'rest-client'
+gem 'money-rails'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
