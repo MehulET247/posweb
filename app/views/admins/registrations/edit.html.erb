@@ -1,0 +1,39 @@
+<fieldset>
+  <legend>Edit Account</legend>
+  <%= simple_form_for(resource, as: resource_name, url: admin_registration_path(resource), html: { method: :put }) do |f| %>
+    <div class="field">
+      <%= f.input :email, autofocus: true %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class="field">
+      <%= f.input :password, autocomplete: "off", label: "New password" %>
+    </div>
+
+    <div class="field">
+      <%= f.input :password_confirmation, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      <%= f.input :current_password, autocomplete: "off", label: "Current Password" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Update", class: "button small orange" %>
+    </div>
+  <% end %>
+</fieldset>
+
+
+<% if devise_mapping.registerable? -%>
+  <fieldset>
+    <legend>Cancel account</legend>
+
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "button small orange", style: "margin-bottom: 0px;" %>
+  </fieldset>
+<% end %>
+
+<%= link_to "Back", :back %>

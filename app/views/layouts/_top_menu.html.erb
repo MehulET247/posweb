@@ -1,13 +1,19 @@
 <nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
     <li class="name">
-      <h1><%= link_to "Omni WEB", root_url %></h1>
+      <h1><%= link_to "POS WEB", root_url %></h1>
     </li>
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
   </ul>
 
   <section class="top-bar-section">
     <ul class="right">
+      <li><%= link_to "Products", products_path %></li>
+      <li class="divider"></li>
+      <% unless user_signed_in? || admin_signed_in? %>
+        <li><%= link_to "Sign in", new_user_session_path, class: "" %></li>
+        <li class="divider"></li>
+      <% end %>
       <% if user_signed_in? %>
         <li class="has-dropdown">
           <a href="#"><%= current_user.email %></a>
@@ -16,6 +22,18 @@
             <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
           </ul>
         </li>
+        <li class="divider"></li>
+      <% end %>
+
+      <% if admin_signed_in? %>
+        <li class="has-dropdown">
+          <a href="#"><%= current_admin.email %></a>
+          <ul class="dropdown">
+            <li><%= link_to "Account", edit_admin_registration_path %></li>
+            <li><%= link_to "Log out", destroy_admin_session_path, method: :delete %></li>
+          </ul>
+        </li>
+        <li class="divider"></li>
       <% end %>
     </ul>
   </section>

@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', password: 'password', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'signup' }
-  root 'welcome#index'
+  resources :products
 
+  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', password: 'password', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'signup' }
+
+  devise_for :admins, :skip => [:registrations], path: "admin", path_names: { sign_in: 'login', sign_out: 'logout', password: 'password', confirmation: 'verification', unlock: 'unblock', sign_up: 'signup' }
+
+  as :admin do
+    get 'admin/edit' => 'devise/registrations#edit', :as => 'edit_admin_registration'
+    put 'admin/:id' => 'devise/registrations#update', :as => 'admin_registration'
+  end
+
+  root "products#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
