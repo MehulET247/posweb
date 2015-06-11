@@ -38,5 +38,23 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
-  #
+
+  after_create :user_new_log
+  after_update :user_update_log
+  after_destroy :user_destroy_log
+
+  private
+
+  def user_new_log
+    Log.create(type: "User", description: "User with email #{self.email} created an account.")
+  end
+
+  def user_update_log
+    Log.create(type: "User", description: "User with email #{self.email} updated his/her account.")
+  end
+
+  def user_destroy_log
+    Log.create(type: "User", description: "User with email #{self.email} destroyed his/her account.")
+  end
+
 end

@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   resources :items, only: [:index]
-
-  resources :logs
-
+  
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', password: 'password', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'signup' }
 
   devise_for :admins, :skip => [:registrations], path: "admin", path_names: { sign_in: 'login', sign_out: 'logout', password: 'password', confirmation: 'verification', unlock: 'unblock', sign_up: 'signup' }
@@ -13,6 +11,10 @@ Rails.application.routes.draw do
   end
 
   root "items#index"
+
+  namespace :admin do
+    resources :logs, only: [:index]
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,41 @@
+<div class="small-12 columns">
+
+  <div class="row">
+    <div class="small-12 medium-9 columns">
+      <h1>App Logs</h1>
+    </div>
+    <div class="small-12 medium-3 column">
+      <%= form_tag admin_logs_url, method: :get, id: "filter_by_type" do %>
+        <%= select_tag "type", options_for_select(Log.all.distinct(:type), params[:type]), prompt: "Filter by type", class: "type" %>
+      <% end %>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="text-center" width="20%">Time (UTC)</th>
+        <th class="text-center" width="20%">Type</th>
+        <th class="text-center" width="60%">Description</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if @logs.length > 0 %>
+      <% @logs.each do |log| %>
+        <tr>
+          <td class="text-center"><%= log.created_at.strftime("%F %T") %></td>
+          <td class="text-center"><%= log.type %></td>
+          <td><%= log.description %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="2">No logs were found.</td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @logs %>
+</div>

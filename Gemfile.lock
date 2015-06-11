@@ -137,6 +137,9 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     listen (2.10.0)
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
@@ -291,6 +294,7 @@ DEPENDENCIES
   foundation-rails
   guard-rspec
   jquery-rails
+  kaminari
   money-rails
   mongoid!
   rails (= 4.2.0)

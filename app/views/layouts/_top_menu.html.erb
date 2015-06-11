@@ -27,6 +27,14 @@
 
       <% if admin_signed_in? %>
         <li class="has-dropdown">
+          <a href="#">Manage</a>
+          <ul class="dropdown">
+            <li><%= link_to "Logs", admin_logs_path %></li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+
+        <li class="has-dropdown">
           <a href="#"><%= current_admin.email %></a>
           <ul class="dropdown">
             <li><%= link_to "Account", edit_admin_registration_path %></li>
