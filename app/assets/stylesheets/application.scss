@@ -18,7 +18,7 @@ body {
 .container {
   background-color: #FFF;
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .content {
@@ -53,4 +53,12 @@ body {
 
 table {
   width: 100%;
+}
+.copyright {
+  color: #304269;
+  margin-bottom: 1rem;
+
+  p{ 
+    font-size: 12px;
+  }
 }

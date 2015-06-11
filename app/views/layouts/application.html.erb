@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Omni WEB" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : app_name %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -20,6 +20,9 @@
       <div class="content">
         <%= yield %>
       </div>
+    </div>
+    <div class="copyright">
+      <p class="text-center"><%= "&copy; #{Date.today.year} #{app_name}. All rights reserved.".html_safe %></p>
     </div>
   </body>
 </html>

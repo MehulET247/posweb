@@ -1,7 +1,7 @@
 <nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
     <li class="name">
-      <h1><%= link_to "POS WEB", root_url %></h1>
+      <h1><%= link_to app_name, root_url %></h1>
     </li>
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
   </ul>
@@ -29,6 +29,7 @@
         <li class="has-dropdown">
           <a href="#">Manage</a>
           <ul class="dropdown">
+            <li><%= link_to "Setting", admin_settings_path %></li>
             <li><%= link_to "Logs", admin_logs_path %></li>
           </ul>
         </li>

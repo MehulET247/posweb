@@ -1,0 +1,13 @@
+<%= simple_form_for([:admin, @setting]) do |f| %>
+
+  <fieldset>
+    <legend>App Settings</legend>
+    <div class="form-inputs">
+      <%= f.input :app_name %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, class: "button small orange" %>
+    </div>
+  </fieldset>
+<% end %>
