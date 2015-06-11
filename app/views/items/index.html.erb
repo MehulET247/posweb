@@ -1,0 +1,27 @@
+<div class="small-12 columns">
+<h1>Menu Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th class="text-center">Name</th>
+      <th class="text-center">Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @items.length > 0 %>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.price %></td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td>No menu items found.</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>

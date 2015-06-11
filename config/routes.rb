@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :logs
+  resources :items, only: [:index]
 
-  resources :products
+  resources :logs
 
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', password: 'password', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'signup' }
 
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     put 'admin/:id' => 'devise/registrations#update', :as => 'admin_registration'
   end
 
-  root "products#index"
+  root "items#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
