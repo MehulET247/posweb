@@ -19,6 +19,7 @@ gem 'rest-client'
 gem 'money-rails'
 gem 'kaminari'
 
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
