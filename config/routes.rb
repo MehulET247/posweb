@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   root "items#index"
 
   namespace :admin do
+    resources :locations
     resources :logs, only: [:index]
     resources :settings, except: [:show]
   end

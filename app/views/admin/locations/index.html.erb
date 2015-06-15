@@ -1,0 +1,34 @@
+<div class="small-12 columns">
+<h1>Locations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th width="60%" class="text-center">Name</th>
+      <th width="15%" class="text-center">Id</th>
+      <th width="25%" class="text-center" colspan="2">Manage</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @locations.length > 0 %>
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%= location.location_name %></td>
+        <td class="text-center"><%= location.location_id %></td>
+        <td class="text-center"><%= link_to 'Edit', edit_admin_location_path(location) %></td>
+        <td class="text-center"><%= link_to 'Destroy', admin_location_path(location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td>No locations found.</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Add New', new_admin_location_path, class: "button small orange" %>
+</div>
