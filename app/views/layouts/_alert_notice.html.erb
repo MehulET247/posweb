@@ -1,3 +1,7 @@
+<% if !Setting.first.present? || !Setting.first.app_api_key.present? %>
+  <% flash[:alert] = "No API key found. Go to Manage > Setting to add one." %>
+<% end %>
+
 <% if alert %>
   <div data-alert class="alert-box alert">
     <%= alert %>

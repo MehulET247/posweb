@@ -1,5 +1,8 @@
 class Setting
   include Mongoid::Document
+  field :app_name, type: String
+  field :app_api_key, type: String
 
-  field :app_name, type: String, default: ""
+  validates :app_name, presence: true, blank: false
+  validates :app_api_key, presence: true, blank: false
 end

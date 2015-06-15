@@ -58,6 +58,6 @@ class Admin::SettingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def setting_params
-      params.require(:setting).permit(:app_name)
+      params.require(:setting).permit(:app_name, :app_api_key)
     end
 end
