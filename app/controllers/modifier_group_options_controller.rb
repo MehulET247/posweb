@@ -1,0 +1,2 @@
+class ModifierGroupOptionsController < ApplicationController
+end

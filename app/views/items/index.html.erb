@@ -1,27 +1,46 @@
 <div class="small-12 columns">
-<h1>Menu Items</h1>
+  <div class="row">
+    <div class="small-12 medium-9 columns">
+      <h1>Items</h1>
+    </div>
+    <div class="small-12 medium-3 column">
+      <%= form_tag items_url, method: :get, id: "filter_by_category" do %>
+        <%= select_tag "category", options_for_select(@categories.map {|c| [c.name]}, params[:category]), prompt: "Filter by category", class: "category" %>
+      <% end %>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th class="text-center">Name</th>
-      <th class="text-center">Price</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% if @items.length > 0 %>
-    <% @items.each do |item| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= item.name %></td>
-        <td><%= item.price %></td>
+        <th width="40%" class="text-center">Name</th>
+        <th width="20%" class="text-center">Modifiers</th>
+        <th width="20%" class="text-center">Price ($)</th>
+        <th width="20%" class="text-center">Available</th>
       </tr>
-    <% end %>
-  <% else %>
-    <tr>
-      <td>No menu items found.</td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% if @items.length > 0 %>
+        <% @items.each do |item| %>
+          <tr>
+            <td><%= item.name %></td>
+            <td>
+              <% item.modifier_groups.each do |mg| %>
+                <%= mg.name %>
+                <%= select_tag "options", options_for_select(mg.modifier_group_options.map {|o| [o.name]}), include_blank: true %>
+                <br/>
+              <% end %>
+            </td>
+            <td class="text-center"><%= (item.price.to_f/100).round(2) %></td>
+            <td class="text-center"><%= item.in_stock ? "Yes" : "No" %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td>No menu items found.</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

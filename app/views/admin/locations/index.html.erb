@@ -14,8 +14,8 @@
     <% if @locations.length > 0 %>
     <% @locations.each do |location| %>
       <tr>
-        <td><%= location.location_name %></td>
-        <td class="text-center"><%= location.location_id %></td>
+        <td><%= location.name %></td>
+        <td class="text-center"><%= location.omnivore_id %></td>
         <td class="text-center"><%= link_to 'Edit', edit_admin_location_path(location) %></td>
         <td class="text-center"><%= link_to 'Destroy', admin_location_path(location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

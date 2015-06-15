@@ -54,6 +54,6 @@ class Admin::LocationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def location_params
-      params.require(:location).permit(:location_name, :location_id)
+      params.require(:location).permit(:name, :omnivore_id)
     end
 end

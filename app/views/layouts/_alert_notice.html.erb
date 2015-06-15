@@ -1,5 +1,7 @@
 <% if !Setting.first.present? || !Setting.first.app_api_key.present? %>
-  <% flash[:alert] = "No API key found. Go to Manage > Setting to add one." %>
+  <% if admin_signed_in? %>
+    <% flash[:alert] = "No API key found. Go to Manage > Setting to add one." %>
+  <% end %>
 <% end %>
 
 <% if alert %>
