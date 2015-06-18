@@ -14,9 +14,8 @@
     <thead>
       <tr>
         <th width="40%" class="text-center">Name</th>
-        <th width="20%" class="text-center">Modifiers</th>
         <th width="20%" class="text-center">Price ($)</th>
-        <th width="20%" class="text-center">Available</th>
+        <th width="40%" class="text-center">Add To Ticket</th>
       </tr>
     </thead>
 
@@ -25,15 +24,30 @@
         <% @items.each do |item| %>
           <tr>
             <td><%= item.name %></td>
-            <td>
-              <% item.modifier_groups.each do |mg| %>
-                <%= mg.name %>
-                <%= select_tag "options", options_for_select(mg.modifier_group_options.map {|o| [o.name]}), include_blank: true %>
-                <br/>
-              <% end %>
-            </td>
             <td class="text-center"><%= (item.price.to_f/100).round(2) %></td>
-            <td class="text-center"><%= item.in_stock ? "Yes" : "No" %></td>
+            <td class="text-center">
+              <div class="row">
+                <% if item.in_stock? %>
+                  <%= form_tag ticket_items_path do %> 
+                    <%= hidden_field_tag "ticket_item[item_id]", item._id %>
+                    <div class="row">
+                      <div class="large-12 columns">
+                        <div class="row collapse">
+                          <div class="small-4 small-offset-2 columns">
+                            <%= number_field_tag "ticket_item[quantity]", item._id, value: "1" %>
+                          </div>
+                          <div class="small-4 columns end">
+                            <%= submit_tag "Add", class: "button postfix" %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <% else %>
+                  Out of Stock
+                <% end %>
+              </div>
+            </td>
           </tr>
         <% end %>
       <% else %>

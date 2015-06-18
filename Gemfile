@@ -18,7 +18,7 @@ gem 'simple_form'
 gem 'rest-client'
 gem 'money-rails'
 gem 'kaminari'
-
+gem "font-awesome-rails"
 
 group :development, :test do
   gem 'rspec-rails'

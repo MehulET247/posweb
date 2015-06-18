@@ -1,0 +1,37 @@
+<div class="small-12 columns">
+  <h1>Ticket</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th class="text-center">Price ($)</th>
+        <th class="text-center">Quantity</th>
+        <th class="text-center">Total Price ($)</td>
+        <th class="text-center">Manage</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% current_ticket.ticket_items.each do |ticket_item| %>
+        <tr>
+          <td><%= ticket_item.name %></td>
+          <td class="text-center"><%= (ticket_item.price.to_f/100).round(2) %></td>
+          <%= form_tag ticket_item_path(ticket_item), method: :put do  %>
+            <td class="text-center">
+              <div class="row">
+                <div class="small-6 small-offset-3 columns">
+                  <%= number_field_tag "ticket_item[quantity]", ticket_item.quantity %></td>
+                </div>
+              </div>
+              <td class="text-center"><%= ((ticket_item.price.to_f/100)*ticket_item.quantity).round(2) %></td>
+              <td class="text-center">
+                <%= submit_tag "Update", class: "button tiny" %>
+              <% end %>
+              <%= link_to '<i class="fa fa-times"></i>'.html_safe, ticket_item_path(ticket_item._id), method: :delete, data: {confirm: "Are you sure?"}, class: "button tiny alert" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p>Ticket Total ($): <%= current_ticket.ticket_items.inject(0) { |sum, ti| sum + ((ti.price * ti.quantity).to_f/100).round(2) } %></p>
+</div>
