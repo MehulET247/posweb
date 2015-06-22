@@ -34,4 +34,5 @@
     </tbody>
   </table>
   <p>Ticket Total ($): <%= current_ticket.ticket_items.inject(0) { |sum, ti| sum + ((ti.price * ti.quantity).to_f/100).round(2) } %></p>
+  <%= link_to "Confirm", confirm_tickets_url, class: "button small" %>
 </div>

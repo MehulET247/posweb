@@ -1,0 +1,42 @@
+<div class="small-12 columns">
+  <h1>Make Payment</h1>
+  <div class="row">
+    <div class="small-6 columns">
+      <%= form_tag payment_tickets_path, method: :post do %>
+        <div class="row">
+          <div class="small-12 medium-6 columns">
+            <%= label_tag "amount", "Amount ($)" %>
+            <%= text_field_tag "amount", current_ticket.ticket_items.inject(0) { |sum, ti| sum + ((ti.price * ti.quantity).to_f/100).round(2) }, disabled: true %>
+          </div>
+          <div class="small-12 medium-6 columns">
+            <%= label_tag "tip", "Tip ($)" %>
+            <%= number_field_tag "tip", 0 %>
+          </div>
+        </div>
+        <%= label_tag "card_number",'Card Number' %>
+        <%= text_field_tag "card_number", nil, maxlength: "16", required: true %>
+
+        <div class="row">
+          <div class="small-12 medium-6 columns">
+            <%= label_tag "expiration_month", 'Expiration month' %>
+            <%= select_month nil, { use_month_numbers: true, field_name: "expiration_month", include_blank: true }, { required: true } %>
+          </div>
+
+          <div class="small-12 medium-6 columns">
+            <%= label_tag "expiration_year", 'Expiration year' %>
+            <%= select_year nil, { start_year: Date.today.year, end_year: Date.today.year + 10, field_name: "expiration_year", include_blank: true }, { required: true } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="small-12 medium-6 columns">
+            <%= label_tag "cvc", "CVC2" %>
+            <%= text_field_tag "cvc", nil, required: true %>
+          </div>
+        </div>
+        <%= submit_tag "Make Payment", class: "button small success" %>
+        <br>
+        <%= link_to "back", tickets_path %>
+      <% end %>
+    </div>
+  </div>
+</div>

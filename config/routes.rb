@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
 
   resources :ticket_items
-  resources :tickets, only: [:index]
+  resources :tickets, only: [:index] do
+    collection do
+      get 'confirm'
+      post 'payment'
+      get 'thank-you'
+    end
+  end
 
   resources :modifier_group_options
   resources :modifier_groups
