@@ -48,7 +48,7 @@ class TicketItemsController < ApplicationController
   # PATCH/PUT /ticket_items/1
   def update
     if @ticket_item.update(ticket_item_params)
-      redirect_to tickets_url, notice: 'Item was successfully updated.'
+      redirect_to current_tickets_url, notice: 'Item was successfully updated.'
     else
       render :edit
     end

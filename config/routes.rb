@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :ticket_items
   resources :tickets, only: [:index] do
     collection do
+      get 'current'
       get 'confirm'
       post 'payment'
       get 'thank-you'

@@ -3,6 +3,10 @@ class TicketsController < ApplicationController
 
   # GET /tickets
   def index
+    @tickets = current_user.tickets.all
+  end
+
+  def current
     @ticket = current_ticket
   end
 
@@ -55,11 +59,19 @@ class TicketsController < ApplicationController
     }
 
     # Send payment info
-    RestClient.post(
+    payment_response = RestClient.post(
       "https://api.omnivore.io/0.1/locations/#{Location.first.omnivore_id}/tickets/#{@response['id']}/payments/",
       payment.to_json,
       {:content_type => :json, :'Api-Key' => Setting.first.app_api_key}
     )
+
+    current_ticket.update_attributes(
+      status: "Complete",
+      user: current_user,
+      omnivore_id: @response["id"]
+    )
+
+    @payment_response = JSON.parse(payment_response)
 
     session[:ticket_id] = nil
 
