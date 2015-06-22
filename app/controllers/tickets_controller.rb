@@ -59,11 +59,15 @@ class TicketsController < ApplicationController
     }
 
     # Send payment info
-    payment_response = RestClient.post(
-      "https://api.omnivore.io/0.1/locations/#{Location.first.omnivore_id}/tickets/#{@response['id']}/payments/",
-      payment.to_json,
-      {:content_type => :json, :'Api-Key' => Setting.first.app_api_key}
-    )
+    begin
+      payment_response = RestClient.post(
+        "https://api.omnivore.io/0.1/locations/#{Location.first.omnivore_id}/tickets/#{@response['id']}/payments/",
+        payment.to_json,
+        {:content_type => :json, :'Api-Key' => Setting.first.app_api_key}
+      )
+    rescue
+      redirect_to current_tickets_url, alert: "Payment could not be processed. Please check payment data and try again." and return
+    end
 
     current_ticket.update_attributes(
       status: "Complete",
