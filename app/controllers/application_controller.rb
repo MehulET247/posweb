@@ -2,11 +2,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def after_sign_in_path_for(resource)
-    sign_in_url = new_user_session_url
+    sign_in_url = new_user_session_url if resource.class == "User"
+    sign_in_url = new_admin_session_url if resource.class == "Admin"
+
     if request.referer == sign_in_url
       super
     else
-      stored_location_for(resource) || request.referer || root_path
+      stored_location_for(resource) || root_path
     end
   end
 
