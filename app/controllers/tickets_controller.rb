@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
 
   # GET /tickets
   def index
-    @tickets = current_user.tickets.all
+    @tickets = current_user.tickets.where(status: "Complete").order(updated_at: :desc)
   end
 
   def current

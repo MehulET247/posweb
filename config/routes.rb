@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :locations
+    resources :tickets, only: [:index]
     resources :logs, only: [:index]
     resources :settings, except: [:show]
   end

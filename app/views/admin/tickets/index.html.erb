@@ -1,0 +1,31 @@
+<div class="small-12 columns">
+  <h1>Tickets</h1>
+  <table>
+    <thead>
+      <tr>
+        <th width="20%" class="text-center">Date</th>
+        <th width="20%" class="text-center">User</th>
+        <th width="20%" class="text-center">Confirmation ID</th>
+        <th width="40%" class="text-center">Items</th>
+        <th width="20%" class="text-center">Total ($)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tickets.each do |ticket| %>
+        <tr>
+          <td class="text-center"><%= ticket.updated_at.strftime("%F") %></td>
+          <td class="center"><%= ticket.user.email %></td>
+          <td class="text-center"><%= ticket.omnivore_id %></td>
+          <td class="text-center">
+            <% ticket.ticket_items.each do |item| %>
+              <%= "#{item.name} - #{item.quantity}" %>
+              <br>
+            <% end %>
+          </td>
+          <td class="text-center"><%= ticket.ticket_items.inject(0) { |sum, ti| sum + ((ti.price * ti.quantity).to_f/100).round(2) } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
