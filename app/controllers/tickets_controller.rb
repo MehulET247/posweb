@@ -75,6 +75,8 @@ class TicketsController < ApplicationController
       omnivore_id: @response["id"]
     )
 
+    Log.create(type: "Ticket", description: "User with email #{current_user.email} paid for ticket #{current_ticket._id}. Omnivore id is #{@response["id"]}")
+
     @payment_response = JSON.parse(payment_response)
 
     session[:ticket_id] = nil

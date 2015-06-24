@@ -39,6 +39,7 @@ class TicketItemsController < ApplicationController
     @ticket_item.ticket = current_ticket
 
     if @ticket_item.save
+      Log.create(type: "Ticket", description: "User with email #{current_user.email} added #{@ticket_item.quantity} #{@ticket_item.name} to Ticket number #{current_ticket._id}") if user_signed_in?
       redirect_to root_url, notice: 'Item was successfully added.'
     else
       render :new
@@ -56,8 +57,9 @@ class TicketItemsController < ApplicationController
 
   # DELETE /ticket_items/1
   def destroy
+    Log.create(type: "Ticket", description: "User with email #{current_user.email} removed #{@ticket_item.quantity} #{@ticket_item.name} from Ticket number #{current_ticket._id}") if user_signed_in?
     @ticket_item.destroy
-    redirect_to tickets_url, notice: 'Item was successfully removed.'
+    redirect_to current_tickets_url, notice: 'Item was successfully removed.'
   end
 
   private

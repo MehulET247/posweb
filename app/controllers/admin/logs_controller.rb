@@ -3,7 +3,7 @@ class Admin::LogsController < ApplicationController
   # GET /logs
   def index
     if params[:type].present?
-      @logs = Log.in(type: [ params[:type]]).page params[:page]
+      @logs = Log.in(type: [ params[:type]]).order(created_at: :desc).page params[:page]
     else
       @logs = Log.all.order(created_at: :desc).page params[:page]
     end
