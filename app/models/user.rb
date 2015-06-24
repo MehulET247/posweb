@@ -43,17 +43,12 @@ class User
   # field :locked_at,       type: Time
 
   after_create :user_new_log
-  after_update :user_update_log
   after_destroy :user_destroy_log
 
   private
 
   def user_new_log
     Log.create(type: "User", description: "User with email #{self.email} created an account.")
-  end
-
-  def user_update_log
-    Log.create(type: "User", description: "User with email #{self.email} updated his/her account.")
   end
 
   def user_destroy_log

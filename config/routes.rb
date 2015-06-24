@@ -14,7 +14,19 @@ Rails.application.routes.draw do
   resources :modifier_groups
   resources :items, only: [:index]
 
-  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', password: 'password', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'signup' }
+  devise_for :users, 
+    path_names: 
+    { sign_in: 'login', 
+      sign_out: 'logout', 
+      password: 'password', 
+      confirmation: 'verification', 
+      unlock: 'unblock', 
+      registration: 'register', 
+      sign_up: 'signup' 
+  }, 
+  controllers: {
+    sessions: 'sessions'
+  }
 
   devise_for :admins, :skip => [:registrations], path: "admin", path_names: { sign_in: 'login', sign_out: 'logout', password: 'password', confirmation: 'verification', unlock: 'unblock', sign_up: 'signup' }
 
